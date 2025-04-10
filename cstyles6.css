@@ -1,0 +1,289 @@
+/* Admin Dashboard CSS - Light Theme with Blue and Grey Accents */
+
+:root {
+    --white: #ffffff;
+    --grey-50: #f9fafb;
+    --grey-100: #f3f4f6;
+    --grey-200: #e5e7eb;
+    --grey-300: #d1d5db;
+    --grey-400: #9ca3af;
+    --grey-500: #6b7280;
+    --grey-600: #4b5563;
+    --grey-700: #374151;
+    --grey-800: #1f2937;
+    --grey-900: #111827;
+  
+    --blue-50: #eff6ff;
+    --blue-100: #dbeafe;
+    --blue-200: #bfdbfe;
+    --blue-300: #93c5fd;
+    --blue-400: #60a5fa;
+    --blue-500: #3b82f6;
+    --blue-600: #2563eb;
+    --blue-700: #1d4ed8;
+    --blue-800: #1e40af;
+    --blue-900: #1e3a8a;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--white);
+    color: var(--grey-800);
+    line-height: 1.5;
+  }
+  
+  /* Layout */
+  #wrapper {
+    transition: all 0.3s ease;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    background: linear-gradient(to bottom, var(--blue-700), var(--blue-900));
+    color: var(--white);
+    transition: all 0.3s ease;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .sidebar h2 {
+    font-weight: 700;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--white);
+  }
+  
+  .sidebar .nav-link {
+    color: var(--grey-200);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    transform: translateX(5px);
+  }
+  
+  .sidebar .nav-link.active {
+    background-color: var(--blue-600);
+    color: var(--white);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Page Content */
+  #page-content-wrapper {
+    background-color: var(--grey-50);
+    transition: all 0.3s ease;
+  }
+  
+  /* Navigation */
+  .navbar {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  #menu-toggle {
+    background-color: var(--blue-700);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    transition: all 0.2s ease;
+    color: var(--white);
+  }
+  
+  #menu-toggle:hover {
+    background-color: var(--blue-800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dashboard Cards */
+  .dashboard-card {
+    background-color: var(--white);
+    border: 1px solid var(--grey-200);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--blue-300);
+  }
+  
+  .dashboard-card .card-header {
+    background-color: var(--blue-100);
+    border-bottom: 1px solid var(--blue-200);
+    color: var(--blue-800);
+    font-weight: 600;
+    padding: 15px 20px;
+  }
+  
+  .dashboard-card .card-body {
+    padding: 20px;
+    color: var(--grey-700);
+  }
+  
+  .dashboard-card .card-title {
+    color: var(--blue-900);
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+  
+  /* Campaign Cards */
+  .campaign-card {
+    background-color: var(--white);
+    border: 1px solid var(--grey-200);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--blue-600);
+  }
+  
+  .campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-left-color: var(--blue-800);
+  }
+  
+  .campaign-card h5 {
+    color: var(--blue-900);
+    font-weight: 600;
+  }
+  
+  .campaign-card p {
+    color: var(--grey-600);
+  }
+  
+  .campaign-card .badge {
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+  }
+  
+  .badge.bg-success {
+    background-color: var(--blue-600) !important;
+    color: var(--white);
+  }
+  
+  .badge.bg-warning {
+    background-color: var(--grey-600) !important;
+    color: var(--white);
+  }
+  
+  .badge.bg-danger {
+    background-color: var(--blue-800) !important;
+    color: var(--white);
+  }
+  
+  .campaign-card .btn {
+    background-color: var(--blue-700);
+    border: none;
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  
+  .campaign-card .btn:hover {
+    background-color: var(--blue-800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Container Styling */
+  h3 {
+    color: var(--blue-900);
+  }
+  
+  .container h2 {
+    color: var(--blue-900);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .container h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--blue-600);
+    border-radius: 2px;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--grey-100);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--blue-400);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-500);
+  }
+  
+  /* Animated Elements */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .dashboard-card, .campaign-card {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  /* Ripple Effect for Buttons */
+  .btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+  }
+  
+  .btn:hover:after {
+    animation: ripple 1s ease-out;
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(20, 20);
+      opacity: 0;
+    }
+  }

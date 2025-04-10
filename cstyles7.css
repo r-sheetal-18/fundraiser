@@ -1,0 +1,129 @@
+/* Global Styles */
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 30px 15px;
+}
+
+/* Heading Styles */
+h2 {
+    /* color: #102c47; */
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Back Button */
+.btn-dark {
+    background-color: #2c3e50;
+    border-color: #1e3c72;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #1e3c72;
+    transform: translateY(-2px);
+}
+
+/* Donation Card */
+.donation-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e0e6ed;
+}
+
+.donation-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+/* Card Content Styles */
+.donation-card h4 {
+    color: #1e3c72;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.donation-card p {
+    color: #34495e;
+    line-height: 1.6;
+}
+
+/* Progress Bar */
+.progress {
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: #2ecc71;
+}
+
+/* Status Styles */
+.status {
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.status.active {
+    background-color: #27ae60;
+    color: white;
+}
+
+.status.pending {
+    background-color: #f39c12;
+    color: white;
+}
+
+.status.completed {
+    background-color: #2980b9;
+    color: white;
+}
+
+/* Button Styles */
+.btn-outline-primary {
+    color: #1e3c72;
+    border-color: #1e3c72;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1e3c72;
+    color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .donation-card {
+        margin-bottom: 20px;
+    }
+}
+
+/* No Donations Message */
+.text-danger {
+    color: #e74c3c !important;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Clock Icon */
+.fa-clock {
+    color: #1e3c72;
+    margin-right: 8px;
+}

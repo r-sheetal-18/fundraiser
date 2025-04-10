@@ -1,0 +1,49 @@
+/* General Styles */
+body, html {
+    background-color: white !important;
+    background: white !important;
+}
+/* Override any potential gradient or other background */
+* {
+    background-color: transparent;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1e3c72 !important;
+    color: #ffffff;
+}
+
+/* Main Content Areas */
+.main-content, 
+.campaigns-section, 
+.hero {
+    background-color: #ffffff !important;
+    color: #1e3c72;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #2c3e50 !important;
+    color: #ffffff;
+}
+
+/* Campaign Cards */
+.campaign-card {
+    background-color: #f4f6f7 !important;
+    border: 1px solid #e0e6e9;
+    color: #1e3c72;
+}
+
+/* Ensure all major sections have white background */
+.container, 
+.row, 
+.col, 
+.section {
+    background-color: #ffffff !important;
+}
+
+/* Additional styles to ensure white background */
+body > * {
+    background-color: #ffffff !important;
+}

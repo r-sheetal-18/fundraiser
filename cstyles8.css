@@ -1,0 +1,144 @@
+/* Global Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: white !important;
+    height: 100%;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 56px; /* Adjust based on navbar height */
+    width: 250px;
+    height: calc(100% - 56px);
+    background-color: #343a40;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+}
+
+.sidebar .btn-dark {
+    background-color: #212529;
+    color: white;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .btn-dark:hover {
+    background-color: #495057;
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px;
+    padding: 0;
+    background-color: white;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #00008B 0%, #000080 100%); /* Darker blue */
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.start-btn {
+    background-color: #6c757d; /* Grey button */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #545b62; /* Slightly darker grey */
+}
+
+/* Campaigns Section */
+.campaigns-section {
+    padding: 50px 0;
+    background-color: white;
+}
+
+.campaigns-section h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+#campaigns-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 10px;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-img {
+        margin-bottom: 10px;
+    }
+}
+
+/* Navigation Bar Overrides */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255,255,255,0.7) !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: white !important;
+}
+
+.navbar-nav .btn-danger {
+    margin-left: 15px;
+}

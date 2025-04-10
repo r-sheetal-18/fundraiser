@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cstyles8.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body, html {
+            background-color: white !important;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Campaign Organizer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="campaigns.php">Campaigns</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-danger" href="logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center">
+            <img id="profile-img" src="uploads/default.png" class="profile-img" alt="Profile Image">
+            <h5 class="text-white ms-3" id="full-name">User</h5>
+        </div>
+        <button class="btn btn-dark w-100 mt-3" onclick="window.location.href='edit_profile.php'">Edit Profile</button>
+        <button class="btn btn-dark w-100 mt-2" onclick="window.location.href='user_donations.php'">My Donations</button>
+        <button class="btn btn-dark w-100 mt-2" onclick="window.location.href='my_campaigns.php'">My Campaigns</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content bg-white">
+        <!-- Hero Section -->
+        <header class="hero text-center text-white">
+            <h1>Welcome, <span id="user-welcome">User</span>!</h1>
+            <p>Start a campaign or explore ongoing fundraisers.</p>
+            <button class="start-btn" onclick="window.location.href='add_campaign.html'">Start a Campaign</button>
+        </header>
+    </div>
+
+    <!-- Fetch user details using jQuery -->
+    <script>
+        $.ajax({
+            url: 'getUserDetails.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if(data.loggedIn) {
+                    // Update the welcome text and sidebar full name
+                    $('#user-welcome').text(data.full_name);
+                    $('#full-name').text(data.full_name);
+                } else {
+                    // Optionally, handle non-logged in state (e.g., redirect to login)
+                    console.log('User not logged in.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching user details:', error);
+            }
+        });
+    </script>
+
+    <script src="script2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

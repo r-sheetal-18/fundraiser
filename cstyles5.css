@@ -1,0 +1,166 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2.text-center {
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #0d6efd !important;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 4px solid;
+}
+
+h3.text-success {
+    border-left-color: #198754;
+}
+
+h3.text-warning {
+    border-left-color: #ffc107;
+}
+
+h3.text-danger {
+    border-left-color: #dc3545;
+}
+
+.campaign-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.campaign-card h4 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.campaign-card .text-muted {
+    font-size: 0.9rem;
+    height: 60px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 10px;
+}
+
+.campaign-card p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    border-radius: 5px;
+}
+
+.btn-outline-primary {
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Status-specific card styling */
+.campaign-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+}
+
+/* Add colored indicators based on campaign status */
+h3.text-success + div .campaign-card::before {
+    background-color: #198754;
+}
+
+h3.text-warning + div .campaign-card::before {
+    background-color: #ffc107;
+}
+
+h3.text-danger + div .campaign-card::before {
+    background-color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .campaign-card {
+        margin-bottom: 20px;
+    }
+    
+    h2.text-center {
+        font-size: 1.8rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Empty state styling */
+.text-center.text-muted {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+/* .btn-outline-edit {
+    color: #0d6efd !important;
+    border: 1px solid #0d6efd !important;
+    background-color: transparent !important;
+}
+
+.btn-outline-edit:hover {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+} */
+
+.btn-outline-edit {
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    background-color: transparent;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    height: 32px;
+    line-height: 1.5;
+}
+
+.btn-outline-edit:hover {
+    background-color: #0d6efd;
+    color: white;
+}

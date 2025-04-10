@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Campaign</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        } */
+        body {
+    background-color: #f8f9fa;
+    padding: 40px 0; /* adds space from top and bottom */
+}
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center text-primary">Create a Campaign</h2>
+
+         <!-- Back Button -->
+    <div class="mb-3">
+        <button class="btn btn-secondary" onclick="history.back()">← Back</button>
+    </div>
+        
+        <form id="campaignForm" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Campaign Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control" id="category" name="category" required>
+                    <option value="Medical">Medical</option>
+                    <option value="Education">Education</option>
+                    <option value="Disaster Relief">Disaster Relief</option>
+                    
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="upi_id" class="form-label">UPI ID</label>
+                <input type="text" class="form-control" id="upi_id" name="upi_id" placeholder="example@upi" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="goal_amount" class="form-label">Goal Amount ($)</label>
+                <input type="number" class="form-control" id="goal_amount" name="goal_amount" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="files" class="form-label">Upload Files</label>
+                <input type="file" class="form-control" id="files" name="files[]" multiple accept="image/*,application/pdf">
+                <div id="filePreview" class="mt-2"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+            <div class="alert alert-success mt-3" id="successMessage" style="display: none;"></div>
+            <div class="alert alert-danger mt-3" id="errorMessage" style="display: none;"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('campaignForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+            
+            fetch('add_campaigns.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes("successfully")) {
+                    document.getElementById('successMessage').innerText = data;
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    document.getElementById('campaignForm').reset();
+                } else {
+                    document.getElementById('errorMessage').innerText = data;
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('files').addEventListener('change', function() {
+            let filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = "";
+            for (let file of this.files) {
+                let listItem = document.createElement('p');
+                listItem.textContent = file.name;
+                filePreview.appendChild(listItem);
+            }
+        });
+    </script>
+
+</body>
+</html>

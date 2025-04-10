@@ -1,0 +1,25 @@
+.qr-code {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.payment-status {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-failed {
+    background-color: #fee2e2;
+    color: #991b1b;
+}

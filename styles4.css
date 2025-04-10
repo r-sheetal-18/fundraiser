@@ -1,0 +1,74 @@
+/* General Styling */
+body {
+    background: linear-gradient(45deg, #2c3e50, #34495e) !important; /* Blue-Grey Theme */
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+/* Container Styling */
+.container {
+    background: rgba(25, 34, 48, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Donation Cards */
+.donation-card {
+    background: rgba(45, 58, 73, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(52, 152, 219, 0.5);
+}
+
+/* Status Badges */
+.status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status.active {
+    background-color: #28a745;
+    color: white;
+}
+
+.status.pending {
+    background-color: #6c757d;
+    color: white;
+}
+
+.status.rejected {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Buttons */
+.btn-dark {
+    background: linear-gradient(45deg, #2980b9, #1f618d);
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-dark:hover {
+    background: #1f618d;
+    transform: scale(1.1);
+}
+
+/* Progress Bar */
+.progress {
+    height: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    border-radius: 5px;
+}

@@ -1,0 +1,89 @@
+/* Global Styles */
+body {
+    background-color: #0a192f; /* Dark Blue Background */
+    color: #ffffff; /* White Text */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Campaign Card */
+.campaign-card {
+    background: #1c1f26; /* Dark Grey Background */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: 1px solid #233554; /* Slight Border */
+}
+
+.campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 150, 255, 0.3);
+}
+
+/* Title */
+.campaign-card h4 {
+    color: #4ea8de; /* Light Blue */
+    font-weight: bold;
+}
+
+/* Description */
+.campaign-card p {
+    color: #d1d1d1; /* Light Grey */
+}
+
+/* Category & Strong Tags */
+.campaign-card p strong {
+    color: #ffffff; /* White Text */
+}
+
+/* Goal & Raised Amount */
+.campaign-card .progress {
+    height: 8px;
+    border-radius: 5px;
+    background: #2a2d36; /* Darker Grey */
+}
+
+.progress-bar {
+    background: #4ea8de; /* Light Blue */
+    border-radius: 5px;
+}
+
+/* Status & Dates */
+.campaign-card p:last-of-type {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Light Grey */
+}
+
+/* Button */
+.campaign-card a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.campaign-card a.btn-outline-primary {
+    color: #4ea8de;
+    border: 2px solid #4ea8de;
+}
+
+.campaign-card a.btn-outline-primary:hover {
+    background: #4ea8de;
+    color: #ffffff;
+}
+
+/* Header Title */
+h2.text-info {
+    color: #82cfff; /* Brighter Light Blue */
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* Centered Text */
+.text-center {
+    color: #ffffff; /* Ensuring White Text */
+}

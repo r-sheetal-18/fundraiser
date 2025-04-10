@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cstyles8.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body, html {
+            background-color: white !important;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #172B4D;
+            color: white;
+            padding-top: 20px;
+            z-index: 100;
+        }
+        
+        .sidebar-header {
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+        }
+        
+        .sidebar button {
+            margin: 8px 15px;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        
+        .sidebar button:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+        
+        /* Main content styles */
+        .main-content {
+            margin-left: 250px;
+            padding-top: 56px;
+            min-height: 100vh;
+        }
+        
+        /* Campaign card styles */
+        .campaign-card {
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .campaign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Badge styles */
+        .badge-medical {
+            background-color: #4E73DF;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        /* Custom button styles */
+        .btn-verify {
+            background-color: #172B4D;
+            color: white;
+        }
+        
+        .btn-verify:hover {
+            background-color: #0B1526;
+            color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 56px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding-top: 56px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hospital Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="campaigns.php">Campaigns</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-danger" href="logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center">
+            <h5 class="text-white ms-3" id="hospital-name">Hospital Name</h5>
+        </div>
+        <button class="btn btn-dark w-100 mt-3" onclick="window.location.href='dashboard.php'">Dashboard</button>
+        <button class="btn btn-dark w-100 mt-2" onclick="window.location.href='verify_campaigns.php'">Verify Campaigns</button>
+        <button class="btn btn-dark w-100 mt-2" onclick="window.location.href='view_campaigns.php'">View Approved Campaigns</button>
+        <button class="btn btn-danger w-100 mt-4" onclick="window.location.href='logout.php'">Logout</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content bg-white">
+        <!-- Hero Section -->
+        <header class="hero text-center text-white" style="padding: 100px 0; background: #172B4D;">
+            <h1>Welcome, <span id="hospital-welcome">Hospital Name</span>!</h1>
+            <p>Manage and verify medical campaigns</p>
+            <div class="mt-3">
+                <button class="btn btn-primary me-3" onclick="window.location.href='view_campaigns.php'">View Campaigns</button>
+                <button class="btn btn-success" onclick="window.location.href='verify_campaigns.php'">Verify Campaigns</button>
+            </div>
+        </header>
+
+        <!-- Medical Verification Section -->
+        <section id="verify-medical" class="verify-section bg-white py-5">
+            <h2 class="text-center mb-4">Pending Medical Verifications</h2>
+            <div class="container">
+                <div class="row" id="verification-list">
+                    <!-- Medical Campaign Card 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card campaign-card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Heart Surgery Fund</h5>
+                                <span class="badge-medical">Medical</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Campaign to raise funds for a critical heart surgery for 8-year-old Jacob Miller.</p>
+                                <p><strong>Goal:</strong> $50,000</p>
+                                <p><strong>Raised:</strong> $12,500</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <button class="btn btn-verify" onclick="window.location.href='campaign_details.php?id=1'">View Details</button>
+                                    <button class="btn btn-success" onclick="approveCampaign(1)">Approve</button>
+                                </div>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Submitted: April 1, 2025
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- Campaigns Section -->
+        <section id="campaigns" class="campaigns-section bg-light py-5">
+            <h2 class="text-center">Approved Campaigns</h2>
+            <div class="container">
+                <div class="row" id="campaigns-list">
+                    <!-- Approved Campaign Card 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card campaign-card">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-success text-white">
+                                <h5 class="mb-0">Medical Equipment</h5>
+                                <span class="badge bg-white text-success">Approved</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Fundraiser for specialized medical equipment for children with disabilities.</p>
+                                <p><strong>Goal:</strong> $35,000</p>
+                                <p><strong>Raised:</strong> $29,750</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+                                </div>
+                                <button class="btn btn-outline-success w-100" onclick="window.location.href='campaign_details.php?id=3'">View Details</button>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Approved: March 24, 2025
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Approved Campaign Card 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card campaign-card">
+                            <div class="card-header d-flex justify-content-between align-items-center bg-success text-white">
+                                <h5 class="mb-0">Wheelchair Access</h5>
+                                <span class="badge bg-white text-success">Approved</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Campaign to improve wheelchair accessibility at local clinics and hospitals.</p>
+                                <p><strong>Goal:</strong> $20,000</p>
+                                <p><strong>Raised:</strong> $18,200</p>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100">91%</div>
+                                </div>
+                                <button class="btn btn-outline-success w-100" onclick="window.location.href='campaign_details.php?id=4'">View Details</button>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Approved: March 20, 2025
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Sample JavaScript to demonstrate functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load hospital name
+            const hospitalName = "City General Hospital";
+            document.getElementById('hospital-name').textContent = hospitalName;
+            document.getElementById('hospital-welcome').textContent = hospitalName;
+            
+            // Function to approve campaigns
+            window.approveCampaign = function(campaignId) {
+                // In a real application, this would send an AJAX request to approve the campaign
+                alert(`Campaign #${campaignId} has been approved!`);
+                
+                // You could then refresh the list or remove the approved campaign
+                // For demonstration, we'll just reload the page
+                // window.location.reload();
+            };
+            
+            // Example of how you would load campaigns from an API
+            /*
+            fetch('api/medical_campaigns.php')
+                .then(response => response.json())
+                .then(data => {
+                    const verificationList = document.getElementById('verification-list');
+                    verificationList.innerHTML = '';
+                    
+                    data.forEach(campaign => {
+                        // Create campaign cards dynamically
+                        const percentage = (campaign.raised / campaign.goal * 100).toFixed(0);
+                        const cardHtml = `
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card campaign-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0">${campaign.title}</h5>
+                                        <span class="badge-medical">Medical</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">${campaign.description}</p>
+                                        <p><strong>Goal:</strong> $${campaign.goal.toLocaleString()}</p>
+                                        <p><strong>Raised:</strong> $${campaign.raised.toLocaleString()}</p>
+                                        <div class="progress mb-3">
+                                            <div class="progress-bar bg-success" role="progressbar" 
+                                                style="width: ${percentage}%" 
+                                                aria-valuenow="${percentage}" 
+                                                aria-valuemin="0" 
+                                                aria-valuemax="100">${percentage}%</div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <button class="btn btn-verify" onclick="window.location.href='campaign_details.php?id=${campaign.id}'">View Details</button>
+                                            <button class="btn btn-success" onclick="approveCampaign(${campaign.id})">Approve</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        Submitted: ${new Date(campaign.date_submitted).toLocaleDateString()}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        verificationList.innerHTML += cardHtml;
+                    });
+                })
+                .catch(error => console.error('Error fetching campaigns:', error));
+            */
+        });
+    </script>
+    <script src="script2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

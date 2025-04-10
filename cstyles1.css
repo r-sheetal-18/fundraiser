@@ -1,0 +1,77 @@
+/* Fix for "Why Choose Us" section spacing */
+.feature-section {
+    padding: 100px 0 60px 0; /* Adjusted padding to create space between title and cards */
+}
+
+.feature-section h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 40px; /* Increased margin to create more space below the title */
+    color: #334155;
+    position: relative;
+    display: inline-block;
+}
+
+/* Fix for feature cards layout */
+.feature-card {
+    padding: 30px 25px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    height: 100%; /* Makes all cards the same height */
+    margin-bottom: 30px;
+    border: 1px solid #f1f5f9;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    min-height: 180px; /* Minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #334155; /* Adds contrast for text */
+}
+
+/* Fix for Contact Us button alignment */
+#contact {
+    background: #f8fafc;
+    padding: 80px 0;
+    color: #334155;
+    position: relative;
+    text-align: center; /* Ensures all content is centered */
+}
+
+#contact .btn {
+    display: inline-block; /* Fixes alignment issues */
+    margin: 20px auto 0; /* Centers the button and adds space above */
+    padding: 14px 32px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px rgba(59, 130, 246, 0.15);
+    position: relative;
+    z-index: 2;
+    min-width: 180px; /* Ensures button has minimum width */
+    white-space: normal; /* Allows text to wrap if needed */
+}
+
+/* Override conflicting styles in home.html */
+body {
+    font-family: 'Nunito', sans-serif !important;
+    background: #f0f4f8 !important;
+    color: #334155 !important;
+}
+
+.navbar {
+    background: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.hero {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9)), 
+                url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover !important;
+}
