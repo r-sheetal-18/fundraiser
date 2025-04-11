@@ -210,11 +210,13 @@ $end_date = date("d M Y", strtotime($campaign['end_date']));
                                 onclick="return confirm('Are you sure you want to APPROVE this campaign?');">
                             Approve Campaign
                         </button>
-                        <button type="submit" name="action" value="refer" 
-                                class="btn btn-info btn-lg"
-                                onclick="return confirm('Are you sure you want to REFER this campaign to a hospital?');">
-                            Refer to Hospital
-                        </button>
+                        <?php if (strtolower($campaign['category']) === 'medical'): ?>
+                            <button type="submit" name="action" value="refer" 
+                                    class="btn btn-info btn-lg"
+                                    onclick="return confirm('Are you sure you want to REFER this campaign to a hospital?');">
+                                Refer to Hospital
+                            </button>
+                        <?php endif; ?>
                     </form>
                 </div>
             </div>

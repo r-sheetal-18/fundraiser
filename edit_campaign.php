@@ -22,21 +22,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $goal_amount = $_POST['goal_amount'];
     $end_date = $_POST['end_date'];
 
-    $stmt = $conn->prepare("UPDATE campaigns SET goal_amount = ?, end_date = ? WHERE campaign_id = ? AND user_id = ?");
-    $stmt->bind_param("dsii", $goal_amount, $end_date, $campaign_id, $user_id);
-
-    if ($stmt->execute()) {
-        $success = "Campaign updated successfully!";
-        echo "<script>
-                setTimeout(function() {
-                    window.location.href = 'my_campaigns.php';
-                }, 2000);
-              </script>";
+    $today = date('Y-m-d');
+    if ($end_date < $today) {
+        $error = "End Date cannot be in the past.";
     } else {
-        $error = "Error updating campaign.";
+        $stmt = $conn->prepare("UPDATE campaigns SET goal_amount = ?, end_date = ? WHERE campaign_id = ? AND user_id = ?");
+        $stmt->bind_param("dsii", $goal_amount, $end_date, $campaign_id, $user_id);
+
+        if ($stmt->execute()) {
+            $success = "Campaign updated successfully!";
+            echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'my_campaigns.php';
+                    }, 2000);
+                  </script>";
+        } else {
+            $error = "Error updating campaign.";
+        }
+        $stmt->close();
     }
-    $stmt->close();
 }
+
 
 // Fetch campaign details
 $stmt = $conn->prepare("SELECT title, goal_amount, end_date FROM campaigns WHERE campaign_id = ? AND user_id = ?");
@@ -87,7 +93,8 @@ $stmt->close();
 
             <div class="mb-3">
                 <label for="end_date" class="form-label">End Date</label>
-                <input type="date" name="end_date" id="end_date" class="form-control" required value="<?= $campaign['end_date'] ?>">
+                <input type="date" name="end_date" id="end_date" class="form-control" required value="<?= $campaign['end_date'] ?>" min="<?= date('Y-m-d') ?>">
+
             </div>
 
             <div class="d-flex justify-content-between">
@@ -99,6 +106,21 @@ $stmt->close();
         <p class="text-danger text-center">Campaign not found or you don't have permission to edit it.</p>
     <?php endif; ?>
 </div>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const endDateInput = document.getElementById('end_date');
+        const endDate = new Date(endDateInput.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (endDate < today) {
+            e.preventDefault();
+            alert("End Date cannot be in the past.");
+            endDateInput.focus();
+        }
+    });
+</script>
+
 
 </body>
 </html>
