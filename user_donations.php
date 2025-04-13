@@ -9,19 +9,15 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch donations with campaign details
-// $query = "SELECT d.amount, d.verified_at, c.title, c.description, c.goal_amount, c.raised_amount, c.status 
-//           FROM donations d
-//           JOIN campaigns c ON d.campaign_id = c.campaign_id
-//           WHERE d.user_id = ?
-//           ORDER BY d.verified_at DESC";
+// Fetch donations with campaign details for the logged-in user
 $query = "SELECT d.amount, d.verified_at, c.campaign_id, c.title, c.description, 
                  c.goal_amount, c.raised_amount, c.status 
           FROM donations d
           JOIN campaigns c ON d.campaign_id = c.campaign_id
-          WHERE d.user_id = ?
+          JOIN payments p ON d.payment_id = p.payment_id
+          JOIN users u ON u.email = p.payment_reference
+          WHERE u.user_id = ?
           ORDER BY d.verified_at DESC";
-
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
@@ -64,7 +60,7 @@ $result = $stmt->get_result();
                             </div>
                             <p><strong>Status:</strong> <span class="status <?= strtolower($row['status']) ?>"><?= ucfirst($row['status']) ?></span></p>
                             <p><i class="fas fa-clock"></i> Donated on: <?= date("d M Y, H:i", strtotime($row['verified_at'])) ?></p>
-                            <a href="campaign_details.php?id=<?= $row['campaign_id'] ?>" class="btn btn-outline-primary btn-sm">View Campaign</a>
+                            <a href="campdetails.php?id=<?= $row['campaign_id'] ?>" class="btn btn-outline-primary btn-sm">View Campaign</a>
                         </div>
                     </div>
                 <?php endwhile; ?>
