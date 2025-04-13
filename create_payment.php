@@ -1,7 +1,7 @@
 <?php
 require_once 'connection.php';
 require_once 'config/constants.php';
-require 'vendor/autoload.php'; // For QR code generation
+require 'vendor/autoload.php';
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -11,51 +11,47 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// Validate inputs
 $amount = filter_input(INPUT_POST, 'amount', FILTER_VALIDATE_FLOAT);
 $customer_name = filter_input(INPUT_POST, 'customer_name', FILTER_SANITIZE_SPECIAL_CHARS);
 $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_SPECIAL_CHARS);
-
-//  Retrieve campaign_id correctly from POST
 $campaign_id = filter_input(INPUT_POST, 'campaign_id', FILTER_VALIDATE_INT);
 
-if (!$campaign_id) {
-    die("Error: Campaign ID is missing or invalid.");
+if (!$amount || !$customer_name || !$campaign_id) {
+    die("Error: Invalid input parameters.");
 }
 
-// Check if campaign exists
-$stmt = $conn->prepare("SELECT goal_amount, raised_amount FROM campaigns WHERE campaign_id = ?");
-$stmt->bind_param("i", $campaign_id);
-$stmt->execute();
-$stmt->bind_result($goal_amount, $raised_amount);
-if (!$stmt->fetch()) {
-    header('Location: index.php?error=campaign_not_found');
-    exit;
-}
-$stmt->close();
-
-//Ensure values are not NULL
-$goal_amount = $goal_amount ?? 0;
-$raised_amount = $raised_amount ?? 0;
-
-$new_total = $raised_amount + $amount;
-if ($new_total > $goal_amount) {
-    $excess_amount = $new_total - $goal_amount;
-    echo "<script>
-        alert('The entered amount exceeds the goal limit by ₹" . number_format($excess_amount, 2) . ". Please enter a lower amount.');
-        window.location.href = 'index.php?campaign_id=" . urlencode($campaign_id) . "';
-    </script>";
-    exit;
-}
-
-
-//  Save payment to database
+// Generate order ID and temporary transaction ID
 $order_id = 'ORDER_' . time() . rand(1000, 9999);
-$stmt = $conn->prepare("INSERT INTO payments (order_id, amount, customer_name, description, campaign_id) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sdssi", $order_id, $amount, $customer_name, $description, $campaign_id);
-$stmt->execute();
+$transaction_id = 'TEMP_' . time(); // Temporary transaction ID
+
+// Save payment to database (with transaction_id)
+$stmt = $conn->prepare("INSERT INTO payments (
+    order_id, 
+    amount, 
+    customer_name, 
+    description, 
+    campaign_id,
+    transaction_id,
+    status
+) VALUES (?, ?, ?, ?, ?, ?, 'pending')");
+
+$stmt->bind_param(
+    "sdssss", 
+    $order_id, 
+    $amount, 
+    $customer_name, 
+    $description, 
+    $campaign_id,
+    $transaction_id
+);
+
+if (!$stmt->execute()) {
+    die("Error saving payment: " . $conn->error);
+}
 $stmt->close();
 
-//Generate UPI link
+// Generate UPI link
 function generateUPILink($amount, $upiId, $name, $description, $orderId) {
     $params = [
         'pa' => $upiId,
@@ -71,7 +67,9 @@ function generateUPILink($amount, $upiId, $name, $description, $orderId) {
 $upiLink = generateUPILink($amount, MERCHANT_UPI_ID, MERCHANT_NAME, $description, $order_id);
 
 // Generate QR Code
-$qrCode = QrCode::create($upiLink);
+$qrCode = QrCode::create($upiLink)
+    ->setSize(300)
+    ->setMargin(10);
 $writer = new PngWriter();
 $result = $writer->write($qrCode);
 $qrDataUri = $result->getDataUri();
@@ -80,21 +78,30 @@ include 'includes/header.php';
 ?>
 
 <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-    <h2 class="text-2xl font-bold mb-6">Payment Details</h2>
+    <h2 class="text-2xl font-bold mb-6">Payment QR Code</h2>
     
-    <div class="mb-6">
-        <p class="text-gray-600 mb-2">Amount: ₹<?php echo number_format($amount, 2); ?></p>
-        <p class="text-gray-600 mb-2">Order ID: <?php echo $order_id; ?></p>
+    <div class="mb-4">
+        <p class="text-gray-700"><strong>Amount:</strong> ₹<?= number_format($amount, 2) ?></p>
+        <p class="text-gray-700"><strong>For:</strong> <?= htmlspecialchars($description) ?></p>
+        <p class="text-gray-700"><strong>Order ID:</strong> <?= htmlspecialchars($order_id) ?></p>
     </div>
     
-    <div class="qr-code mb-6">
-        <img src="<?php echo $qrDataUri; ?>" alt="Payment QR Code">
+    <div class="qr-container mb-6 p-4 bg-gray-100 rounded-lg flex justify-center">
+        <img src="<?= $qrDataUri ?>" alt="Scan to Pay" class="w-64 h-64">
     </div>
     
-    <a href="verify.php?order_id=<?php echo urlencode($order_id); ?>&amount=<?php echo urlencode($amount); ?>&customer_name=<?php echo urlencode($customer_name); ?>&description=<?php echo urlencode($description); ?>&campaign_id=<?php echo urlencode((string)$campaign_id); ?>" 
-   class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
-    Next
-</a>
+    <div class="instructions bg-blue-50 p-4 rounded-lg mb-6">
+        <h3 class="font-bold text-blue-800 mb-2">Instructions:</h3>
+        <ol class="list-decimal list-inside text-sm text-blue-700">
+            <li>Show this QR code to the donor</li>
+            <li>Ask them to scan it with any UPI app</li>
+            <li>Verify payment completion in the system</li>
+        </ol>
+    </div>
+    
+    <a href="admin_dashboard.php" class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
+        Back to Dashboard
+    </a>
 </div>
 
 <?php include 'includes/footer.php'; ?>
