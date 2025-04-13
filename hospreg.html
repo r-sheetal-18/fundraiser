@@ -67,6 +67,15 @@
                 <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
                 <div class="error-message" id="address-error"></div>
             </div>
+            
+           <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="error-message" id="password-error"></div>
+            </div>
+
+            
 
             <button type="submit" class="btn btn-primary w-100">Register Hospital</button>
         </form>
@@ -110,6 +119,12 @@
                 showError('phone-error', 'Please enter a valid phone number');
                 isValid = false;
             }
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                showError('password-error', 'Password must be at least 6 characters long');
+                isValid = false;
+            }
+
 
             return isValid;
         }

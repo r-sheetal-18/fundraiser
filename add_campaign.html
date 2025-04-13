@@ -90,9 +90,21 @@
     <script>
         document.getElementById('campaignForm').addEventListener('submit', function(event) {
             event.preventDefault();
-
+    
+            const endDateInput = document.getElementById('end_date');
+            const endDate = new Date(endDateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // remove time part for comparison
+    
+            if (endDate < today) {
+                document.getElementById('errorMessage').innerText = "End Date cannot be in the past.";
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                return;
+            }
+    
             let formData = new FormData(this);
-            
+    
             fetch('add_campaigns.php', {
                 method: 'POST',
                 body: formData
@@ -104,6 +116,7 @@
                     document.getElementById('successMessage').style.display = 'block';
                     document.getElementById('errorMessage').style.display = 'none';
                     document.getElementById('campaignForm').reset();
+                    document.getElementById('filePreview').innerHTML = '';
                 } else {
                     document.getElementById('errorMessage').innerText = data;
                     document.getElementById('errorMessage').style.display = 'block';
@@ -112,7 +125,7 @@
             })
             .catch(error => console.error('Error:', error));
         });
-
+    
         document.getElementById('files').addEventListener('change', function() {
             let filePreview = document.getElementById('filePreview');
             filePreview.innerHTML = "";
@@ -123,6 +136,7 @@
             }
         });
     </script>
+    
 
 </body>
 </html>
