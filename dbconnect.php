@@ -7,7 +7,7 @@ class Database {
     }
 
     private function getDBConnection() {
-        $host = "sneha.mysql.database.azure.com";
+        $host = "fundraiser.mysql.database.azure.com";
         $username = "sneha";
         $password = "sheetal@123";
         $database = "projectcamp";
