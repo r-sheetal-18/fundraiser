@@ -13,7 +13,7 @@
 <?php
 function getDBConnection() {
     // $host = "mace.mysql.database.azure.com";
-    $host = "sneha.mysql.database.azure.com";
+    $host = "fundraiser.mysql.database.azure.com";
     $username = "sneha"; // Always use full username
     $password = "sheetal@123";
     $database = "projectcamp";
