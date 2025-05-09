@@ -99,8 +99,8 @@ include 'includes/header.php';
         </ol>
     </div>
     
-    <a href="admin_dashboard.php" class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
-        Back to Dashboard
+    <a href="verify.php" class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
+        Next
     </a>
 </div>
 
