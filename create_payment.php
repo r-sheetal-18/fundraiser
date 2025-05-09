@@ -99,9 +99,10 @@ include 'includes/header.php';
         </ol>
     </div>
     
-    <a href="verify.php" class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
-        Next
-    </a>
+    <a href="verify.php?order_id=<?php echo urlencode($order_id); ?>&amount=<?php echo urlencode($amount); ?>&customer_name=<?php echo urlencode($customer_name); ?>&description=<?php echo urlencode($description); ?>&campaign_id=<?php echo urlencode((string)$campaign_id); ?>" 
+   class="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-600">
+    Next
+</a>
 </div>
 
 <?php include 'includes/footer.php'; ?>
